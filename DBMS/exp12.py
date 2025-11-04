@@ -1,3 +1,9 @@
+/*
+Terminal 
+
+sudo mongosh
+*/
+
 from pymongo import MongoClient
 
 # Connect to MongoDB
