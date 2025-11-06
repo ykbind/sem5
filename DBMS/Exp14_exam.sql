@@ -13,21 +13,10 @@ db.grocery_sales.insertMany([
   { product_name: "Carrot", category: "Vegetable", quantity_sold: 10 },
 ]);
 
-/*{
-  acknowledged: true,
-  insertedIds: {
-    '0': ObjectId('690a4d526dda139e99cebeb0'),
-    '1': ObjectId('690a4d526dda139e99cebeb1'),
-    '2': ObjectId('690a4d526dda139e99cebeb2'),
-    '3': ObjectId('690a4d526dda139e99cebeb3'),
-    '4': ObjectId('690a4d526dda139e99cebeb4'),
-    '5': ObjectId('690a4d526dda139e99cebeb5'),
-    '6': ObjectId('690a4d526dda139e99cebeb6')
-  }
-}*/
+
 
 // Map Function: Emit key-value pairs of (product_name, quantity_sold)
-/*var mapFunction = function () {
+var mapFunction = function () {
   emit(this.product_name, this.quantity_sold);
 };
 
@@ -35,23 +24,14 @@ db.grocery_sales.insertMany([
 var reduceFunction = function (key, values) {
   return Array.sum(values);
 };
-*/
+
 
 // Execute MapReduce
 
 db.grocery_sales.mapReduce(mapFunction, reduceFunction, {
   out: "total_sales", // Output collection name
 });
-// DeprecationWarning: Collection.mapReduce() is deprecated. Use an aggregation instead.
-// https://mongodb.com/docs/manual/core/map-reduce for details.
-// { result: 'total_sales', ok: 1 }
 
 // View the results from the output collection
 
 db.total_sales.find().pretty();
-[
-  { _id: "Tomato", value: 40 },
-  { _id: "Carrot", value: 30 },
-  { _id: "Apple", value: 75 },
-  { _id: "Banana", value: 45 },
-];
