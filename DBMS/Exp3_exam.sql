@@ -7,7 +7,6 @@ CREATE TABLE cust_mstr (
     lname VARCHAR(50) NOT NULL
 );
 
-
 -- Create Address Details Table
 CREATE TABLE add_dets (
     code_no INT PRIMARY KEY,
@@ -115,6 +114,7 @@ Select * From emp_mstr;
 SELECT e.e_mpno, e.f_name, e.l_name, e.dept, e.desg, b.name AS branch_name
 FROM emp_mstr e
 JOIN branch_mstr b ON e.branch_no = b.b_no;
+
 
 
 
