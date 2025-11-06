@@ -12,7 +12,6 @@ db.students.insertMany([
   { name: "Tina", department: "Mechanical", marks: 95, city: "Nashik" }
 ]);
 
-
 // Q1. •	Calculate average marks per department using aggregation.
 
 db.students.aggregate([
@@ -79,5 +78,6 @@ db.students.createIndex({ department: 1, city: 1 });
 
 
 db.students.getIndexes();
+
 
 
