@@ -7,7 +7,6 @@ CREATE TABLE Account (
     balance DECIMAL(12,2) CHECK (balance >= 0)
 );
 
-
 CREATE TABLE Branch (
     branch_name VARCHAR(50) PRIMARY KEY,
     branch_city VARCHAR(50),
@@ -139,6 +138,7 @@ WHERE amount BETWEEN 1300 AND 1500;
 
 
 SELECT * FROM Loan;
+
 
 
 
