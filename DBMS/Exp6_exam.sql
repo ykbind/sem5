@@ -5,7 +5,7 @@ CREATE TABLE areas (
     radius INT PRIMARY KEY,
     area DECIMAL(10,2)
 );
-Query OK, 0 rows affected (0.05 sec)
+
 
 DELIMITER $$
 CREATE PROCEDURE populate_areas()
@@ -23,30 +23,13 @@ BEGIN
         SET v = v + 1;
     END WHILE;
 END$$
-Query OK, 0 rows affected (0.02 sec)
+
 
 DELIMITER ;
 CALL populate_areas();
-Query OK, 1 row affected (0.09 sec)
+
 
 SELECT * FROM areas ORDER BY radius;
-+--------+--------+
-| radius | area   |
-+--------+--------+
-|      1 |   3.14 |
-|      2 |  12.57 |
-|      3 |  28.27 |
-|      4 |  50.27 |
-|      5 |  78.54 |
-|      6 | 113.10 |
-|      7 | 153.94 |
-|      8 | 201.06 |
-|      9 | 254.47 |
-|     10 | 314.16 |
-+--------+--------+
-10 rows in set (0.00 sec)
-
-
 
 
 -- For Area of Circle with radius 5 to 9
@@ -56,7 +39,6 @@ CREATE TABLE areas (
     radius INT PRIMARY KEY,
     area DECIMAL(10,2)
 );
-Query OK, 0 rows affected (0.04 sec)
 
 DELIMITER $$
 CREATE PROCEDURE populate_areas()
@@ -71,21 +53,13 @@ BEGIN
         SET v = v + 1;
     END WHILE;
 END$$
-Query OK, 0 rows affected (0.03 sec)
+
 
 DELIMITER ;
 CALL populate_areas();
-Query OK, 1 row affected (0.08 sec)
+
 
 SELECT * FROM areas ORDER BY radius;
-+--------+--------+
-| radius | area   |
-+--------+--------+
-|      5 |  78.54 |
-|      6 | 113.10 |
-|      7 | 153.94 |
-|      8 | 201.06 |
-|      9 | 254.47 |
-+--------+--------+
-5 rows in set (0.00 sec)
+
+
 
