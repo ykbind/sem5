@@ -6,7 +6,7 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="kaustubh",
     password="Strong@password",
-    database="exp8"
+    database="exp"
 
 )
 
@@ -104,5 +104,6 @@ while choice!="4" :
 # Clean up
 
 mycursor.close()
+
 
 mydb.close()
