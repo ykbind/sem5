@@ -1,6 +1,5 @@
 -- declare tables
 
-
 CREATE TABLE Account (
     Acc_no INT PRIMARY KEY,
     branch_name VARCHAR(50) NOT NULL,
@@ -149,6 +148,7 @@ SELECT A.branch_name, COUNT(DISTINCT D.cust_name) AS no_of_depositors
 FROM Account A
 JOIN Depositor D ON A.Acc_no = D.acc_no
 GROUP BY A.branch_name;
+
 
 
 
