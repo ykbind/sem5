@@ -191,4 +191,3 @@ JOIN Subject S ON M.sub_code = S.sub_code
 WHERE S.sub_name = 'DBMS' AND M.marks < 40;
 
 ---------
-
