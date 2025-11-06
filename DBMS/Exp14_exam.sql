@@ -1,6 +1,5 @@
 //use GroceryStore;
 //switched to db GroceryStore
-
 // Insert sample data into grocery_sales collection
 
 db.grocery_sales.insertMany([
@@ -35,3 +34,4 @@ db.grocery_sales.mapReduce(mapFunction, reduceFunction, {
 // View the results from the output collection
 
 db.total_sales.find().pretty();
+
