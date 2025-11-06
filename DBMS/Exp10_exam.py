@@ -7,7 +7,6 @@ mydb = mysql.connector.connect(
     user="kaustubh",
     password="Strong@password",
     database="exp"
-
 )
 
 mycursor = mydb.cursor()
@@ -107,3 +106,4 @@ mycursor.close()
 
 
 mydb.close()
+
