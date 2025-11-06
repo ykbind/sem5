@@ -7,7 +7,6 @@ CREATE TABLE cust_mstr (
     lname VARCHAR(50) NOT NULL
 );
 
-
 -- Create Account/FD link table
 CREATE TABLE acc_fd_cust_dets (
     codeno INT PRIMARY KEY,
@@ -142,6 +141,7 @@ LEFT JOIN cntc_dets c ON e.emp_no = c.emp_no;
 SELECT e.emp_no, e.f_name, e.l_name, e.dept, c.cntc_type, c.cntc_data
 FROM emp_mstr e
 RIGHT JOIN cntc_dets c ON e.emp_no = c.emp_no;
+
 
 
 
