@@ -7,7 +7,6 @@ CREATE TABLE Stud_Marks (
     total_marks INT
 );
 
-
 CREATE TABLE Result (
     roll INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
@@ -65,6 +64,7 @@ CALL proc_Grade();
 
 
 SELECT * FROM Result;
+
 
 
 
