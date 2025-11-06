@@ -3,7 +3,6 @@ create database CollegeDB;
 
 use CollegeDB;
 
-
 -- Create tables: students and alumni
 
 CREATE TABLE students (
@@ -119,6 +118,7 @@ WHERE a.name IS NULL;
 SELECT name, city
 FROM alumni
 WHERE name NOT IN (SELECT name FROM students);
+
 
 
 
