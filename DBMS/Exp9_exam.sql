@@ -7,7 +7,6 @@ CREATE TABLE Library (
     price DECIMAL(8,2)
 );
 
-
 -- Insert sample data into Library table
 
 INSERT INTO Library (book_name, author, price) VALUES
@@ -72,6 +71,7 @@ SELECT * FROM Library;
 
 
 SELECT * FROM Library_Audit;
+
 
 
 
