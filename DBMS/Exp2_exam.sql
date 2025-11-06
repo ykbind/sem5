@@ -1,3 +1,6 @@
+-- declare tables
+--Q.1 Create above tables with appropriate constraints like primary key, foreign key constrains, not null etc. with suitable data
+
 CREATE TABLE Account (
     Acc_no INT PRIMARY KEY,
     branch_name VARCHAR(50) NOT NULL,
@@ -43,7 +46,7 @@ CREATE TABLE Borrower (
     FOREIGN KEY (loan_no) REFERENCES Loan(loan_no)
 );
 
-
+-- insert values
 INSERT INTO Branch VALUES
     ('Akurdi', 'Pune', 5000000),
     ('Nigdi', 'Pune', 4000000),
@@ -100,41 +103,42 @@ SELECT * FROM Loan;
 SELECT * FROM Borrower;
 
 
-
+--Q.2. Modify “assets” attribute of branch table to “Property”  
 ALTER TABLE Branch RENAME COLUMN assets TO Property;
 
 
 SELECT * FROM Branch;
 
-
+--Q.3. Find all loan numbers for loans made at Akurdi Branch with loan amount > 12000.
 SELECT loan_no
 FROM Loan
 WHERE branch_name = 'Akurdi' AND amount > 12000;
 
-
+--Q.4. Find the average account balance at each branch
 SELECT branch_name, AVG(balance) AS avg_balance
 FROM Account
 GROUP BY branch_name;
 
-
+--Q.5. Find the branches where average account balance > 12000.
 SELECT branch_name, AVG(balance) AS avg_balance
 FROM Account
 GROUP BY branch_name
 HAVING AVG(balance) > 12000;
 
-
+--Q.6. Find number of tuples in customer relation.
 SELECT COUNT(*) AS total_customers
 FROM Customer;
 
-
+--Q.7. Calculate total loan amount given by bank.
 SELECT SUM(amount) AS total_loan_amount
 FROM Loan;
 
-
+--Q.8. Delete all loans with loan amount between 1300 and 1500.
 DELETE FROM Loan
 WHERE amount BETWEEN 1300 AND 1500;
 
 
 SELECT * FROM Loan;
+
 
 
