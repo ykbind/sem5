@@ -1,3 +1,5 @@
+-- declare tables
+
 
 CREATE TABLE Account (
     Acc_no INT PRIMARY KEY,
@@ -45,6 +47,7 @@ CREATE TABLE Borrower (
     FOREIGN KEY (loan_no) REFERENCES Loan(loan_no)
 );
 
+-- insert values
 
 INSERT INTO Branch VALUES
     ('Akurdi', 'Pune', 5000000),
@@ -81,6 +84,7 @@ INSERT INTO Borrower VALUES
     ('Neha', 202),
     ('Amit', 203);
 
+--Create above tables with appropriate constraints like primary key, foreign key, not null etc. with suitable data
 
 SELECT * FROM Account;
 
@@ -98,35 +102,35 @@ SELECT * FROM Loan;
 
 
 SELECT * FROM Borrower;
-)
 
+--Q.2. Create view/alias for customer table as cust.
 CREATE VIEW cust AS SELECT * FROM Customer;
 
 
 SELECT * FROM cust;
 
-
+--Q.3 Add customer phone number in Customer table.
 ALTER TABLE Customer ADD phone_no VARCHAR(15);
 
 
 SELECT * FROM Customer;
 
-
+--Q.4 Delete phone number attribute from Customer table.
 ALTER TABLE Customer DROP COLUMN phone_no;
 
 
 SELECT * FROM Customer;
 
-
+--Q.5. Find the names of all branches in loan relation.
 SELECT DISTINCT branch_name
 FROM Loan;
 
-
+--Q.6. Find all customers who have a loan from bank. Find their names,loan_no and loan amount.      
 SELECT B.cust_name, L.loan_no, L.amount
     FROM Borrower B
     JOIN Loan L ON B.loan_no = L.loan_no;
 
-
+--Q.7. List all customers in alphabetical order who have loan from Akurdi branch.
 SELECT C.cust_name
     FROM Customer C
     JOIN Borrower B ON C.cust_name = B.cust_name
@@ -134,17 +138,18 @@ SELECT C.cust_name
     WHERE L.branch_name = 'Akurdi'
     ORDER BY C.cust_name ASC;
 
-
+--Q.8. Find average account balance at Akurdi branch.
 SELECT branch_name, AVG(balance) AS avg_balance
 FROM Account
 WHERE branch_name = 'Akurdi'
 GROUP BY branch_name;
 
-
+--Q.9. Find no. of depositors at each branch.
 SELECT A.branch_name, COUNT(DISTINCT D.cust_name) AS no_of_depositors
 FROM Account A
 JOIN Depositor D ON A.Acc_no = D.acc_no
 GROUP BY A.branch_name;
+
 
 
 
