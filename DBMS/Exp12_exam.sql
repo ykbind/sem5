@@ -1,84 +1,73 @@
-// Insert sample data into zipcode and employee collections
+use ZipcodeDB;
 
 db.zipcode.insertMany([
-{ _id: "10280", city: "NEW YORK", state: "NY", pop: 5574 },
-{ _id: "20101", city: "LOS ANGELES", state: "CA", pop: 180000 },
-{ _id: "30301", city: "CHICAGO", state: "IL", pop: 220000 },
-{ _id: "40001", city: "HOUSTON", state: "TX", pop: 85000 },
-{ _id: "50001", city: "DALLAS", state: "TX", pop: 125000 }
-])
-
-// Insert sample data into employee collection
-
-db.employee.insertMany([
-  { emp_no: 1, name: "Amit", dept: "IT", salary: 20000 },
-  { emp_no: 2, name: "Ravi", dept: "HR", salary: 15000 },
-  { emp_no: 3, name: "Sonal", dept: "IT", salary: 30000 },
-  { emp_no: 4, name: "Meena", dept: "Finance", salary: 18000 },
-  { emp_no: 5, name: "Raj", dept: "HR", salary: 20000 }
-])
+  { _id: "10280", city: "NEW YORK", state: "NY", pop: 5574 },
+  { _id: "10282", city: "NEW YORK", state: "NY", pop: 12000 },
+  { _id: "90001", city: "LOS ANGELES", state: "CA", pop: 40000 },
+  { _id: "90002", city: "SAN DIEGO", state: "CA", pop: 12000 },
+  { _id: "73301", city: "AUSTIN", state: "TX", pop: 85000 },
+  { _id: "77001", city: "HOUSTON", state: "TX", pop: 95000 },
+  { _id: "60601", city: "CHICAGO", state: "IL", pop: 50000 },
+  { _id: "60602", city: "CHICAGO", state: "IL", pop: 70000 }
+]);
 
 // Q1. Return States with Populations above 1 Lakh.
-
-db.zipcode.find({ pop: { $gt: 100000 } })
-
-// Q2. . Display the department wise average salary
-
-db.employee.aggregate([
-  { $group: { _id: "$dept", avg_salary: { $avg: "$salary" } } }
-])
-
-
-
-// Q3. Display the no. Of employees working in each department
-
-db.employee.aggregate([
-  { $group: { _id: "$dept", no_of_employees: { $sum: 1 } } }
-])
-
-
-
-// Q4. Display the department wise total salary of departments having total salary greater than or equals to 50000/-
-
-db.employee.aggregate([
-  { $group: { _id: "$dept", total_salary: { $sum: "$salary" } } },
-  { $match: { total_salary: { $gte: 50000 } } }
-])
-
-
-
-// Q5. Write the queries using the different operators like max, min. Etc.
-db.employee.aggregate([
+db.zipcode.aggregate([
   {
     $group: {
-      _id: "$dept",
-      max_salary: { $max: "$salary" },
-      min_salary: { $min: "$salary" },
-      total_salary: { $sum: "$salary" }
+      _id: "$state",
+      total_pop: { $sum: "$pop" }
+    }
+  },
+  {
+    $match: { total_pop: { $gt: 100000 } }
+  }
+]);
+
+// Q2. Create a single-field index on the city field.
+db.zipcode.createIndex({ city: 1 });
+
+// Q3. Create a compound index on the state and city fields.
+db.zipcode.createIndex({ state: 1, city: 1 });
+
+// Q4. Find the total population for each state.
+db.zipcode.aggregate([
+  {
+    $group: {
+      _id: "$state",
+      total_population: { $sum: "$pop" }
     }
   }
-])
+]);
 
+// Q5. Find the average population per city within each state.
+db.zipcode.aggregate([
+  {
+    $group: {
+      _id: { state: "$state", city: "$city" },
+      avg_pop: { $avg: "$pop" }
+    }
+  }
+]);
 
-// Q6. Create the simple index on roll_no field
+// Q6. List the states having total population greater than 20,000.
+db.zipcode.aggregate([
+  {
+    $group: {
+      _id: "$state",
+      total_population: { $sum: "$pop" }
+    }
+  },
+  {
+    $match: { total_population: { $gte: 20000 } }
+  }
+]);
 
-db.students.createIndex({ roll_no: 1 })
+// Q7. Retrieve all cities in California (state = 'CA') with a population greater than 10,000.
+db.zipcode.find(
+  { state: "CA", pop: { $gt: 10000 } },
+  { city: 1, pop: 1, _id: 0 }
+);
 
-// Q7. create unique index on any field for above given collections
-
-db.employee.createIndex({ emp_no: 1 }, { unique: true })
-
-  
-// Q8. create compound index on any fields for above given collections
-
-db.employee.createIndex({ dept: 1, salary: -1 })
-
-// Q9 Show all the indexes created in the database 
-
-db.employee.getIndexes()
-
-//Q10 Show all the indexes created above collections
-
-db.students.getIndexes()
-
-ICEM>
+// Show all the indexes created on the zipcode collection.
+db.zipcode.getIndexes();
