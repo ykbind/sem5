@@ -7,7 +7,7 @@ CREATE TABLE Borrower (
     NameofBook VARCHAR(100),
     Status CHAR(1)   -- I = Issued, R = Returned
 );
-Query OK, 0 rows affected (0.04 sec)
+
 
 CREATE TABLE Fine (
     Roll_no INT,
@@ -15,7 +15,7 @@ CREATE TABLE Fine (
     Amt DECIMAL(10,2),
     FOREIGN KEY (Roll_no) REFERENCES Borrower(Roll_no)
 );
-Query OK, 0 rows affected (0.02 sec)
+
 
 -- Insert sample data into Borrower table
 
@@ -23,8 +23,7 @@ INSERT INTO Borrower VALUES
     (1, 'Ravi', '2024-10-01', 'SQL Fundamentals', 'I'),
     (2, 'Sneha', '2024-09-15', 'Python Basics', 'I'),
     (3, 'Amit', '2024-10-20', 'DBMS Concepts', 'I');
-Query OK, 3 rows affected (0.02 sec)
-Records: 3  Duplicates: 0  Warnings: 0
+
 
 DELIMITER $$
 CREATE PROCEDURE ReturnBook (
@@ -77,35 +76,16 @@ CREATE PROCEDURE ReturnBook (
         SELECT CONCAT('Book returned. Fine amount = Rs ', v_fine_amt) AS Message;
     END IF;
 END$$
-Query OK, 0 rows affected (0.03 sec)
+
 
 DELIMITER ;
 CALL ReturnBook(2, 'Python Basics');
-+------------------------------------------+
-| Message                                  |
-+------------------------------------------+
-| Book returned. Fine amount = Rs 20750.00 |
-+------------------------------------------+
-1 row in set (0.03 sec)
 
 Query OK, 0 rows affected (0.04 sec)
 
 -- Verify the updates
 
 Select * From Borrower;
-+---------+-------+-------------+------------------+--------+
-| Roll_no | Name  | DateofIssue | NameofBook       | Status |
-+---------+-------+-------------+------------------+--------+
-|       1 | Ravi  | 2024-10-01  | SQL Fundamentals | I      |
-|       2 | Sneha | 2024-09-15  | Python Basics    | R      |
-|       3 | Amit  | 2024-10-20  | DBMS Concepts    | I      |
-+---------+-------+-------------+------------------+--------+
-3 rows in set (0.00 sec)
+
 
 Select * From Fine;
-+---------+------------+----------+
-| Roll_no | Date       | Amt      |
-+---------+------------+----------+
-|       2 | 2025-11-04 | 20750.00 |
-+---------+------------+----------+
-1 row in set (0.00 sec)
