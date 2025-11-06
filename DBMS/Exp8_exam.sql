@@ -11,7 +11,6 @@ CREATE TABLE N_RollCall (
     name VARCHAR(50)
 );
 
-
 -- Insert sample data into both tables
 
 INSERT INTO O_RollCall (roll_no, name) VALUES (1, 'Ravi'), (2, 'Sneha');
@@ -61,6 +60,7 @@ CALL merge_rollcalls();
 
 
 SELECT * FROM O_RollCall ORDER BY roll_no;
+
 
 
 
