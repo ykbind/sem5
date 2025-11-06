@@ -156,7 +156,7 @@ SELECT * FROM Borrower;
 CREATE VIEW cust AS SELECT * FROM Customer;
 Query OK, 0 rows affected (0.01 sec)
 
-SELECT * FROM Customer;
+SELECT * FROM cust;
 +-----------+-------------+-----------+
 | cust_name | cust_street | cust_city |
 +-----------+-------------+-----------+
@@ -255,4 +255,5 @@ GROUP BY A.branch_name;
 | Deccan      |                1 |
 +-------------+------------------+
 2 rows in set (0.00 sec)
+
 
