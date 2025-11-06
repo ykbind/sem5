@@ -4,23 +4,21 @@ CREATE TABLE O_RollCall (
     roll_no INT PRIMARY KEY,
     name VARCHAR(50)
 );
-Query OK, 0 rows affected (0.04 sec)
+
 
 CREATE TABLE N_RollCall (
     roll_no INT PRIMARY KEY,
     name VARCHAR(50)
 );
-Query OK, 0 rows affected (0.05 sec)
+
 
 -- Insert sample data into both tables
 
 INSERT INTO O_RollCall (roll_no, name) VALUES (1, 'Ravi'), (2, 'Sneha');
-Query OK, 2 rows affected (0.00 sec)
-Records: 2  Duplicates: 0  Warnings: 0
+
 
 INSERT INTO N_RollCall (roll_no, name) VALUES (2, 'Sneha'), (3, 'Amit'), (4, 'Neha');
-Query OK, 3 rows affected (0.00 sec)
-Records: 3  Duplicates: 0  Warnings: 0
+
 
 -- OPTION A: Recommended fast merge (insert rows from N that are not already in O)
 
@@ -28,19 +26,9 @@ INSERT INTO O_RollCall (roll_no, name)
 SELECT n.roll_no, n.name
 FROM N_RollCall n
 WHERE NOT EXISTS (SELECT 1 FROM O_RollCall o WHERE o.roll_no = n.roll_no);
-Query OK, 2 rows affected (0.01 sec)
-Records: 2  Duplicates: 0  Warnings: 0
+
 
 SELECT * FROM O_RollCall ORDER BY roll_no;
-+---------+-------+
-| roll_no | name  |
-+---------+-------+
-|       1 | Ravi  |
-|       2 | Sneha |
-|       3 | Amit  |
-|       4 | Neha  |
-+---------+-------+
-4 rows in set (0.00 sec)
 
 -- OPTION B: Cursor-based procedure (if you must use a cursor)
 
@@ -66,20 +54,13 @@ BEGIN
   END LOOP;
   CLOSE cur;
   END$$
-Query OK, 0 rows affected (0.03 sec)
+
 
 DELIMITER ;
 CALL merge_rollcalls();
-Query OK, 0 rows affected (0.00 sec)
+
 
 SELECT * FROM O_RollCall ORDER BY roll_no;
-+---------+-------+
-| roll_no | name  |
-+---------+-------+
-|       1 | Ravi  |
-|       2 | Sneha |
-|       3 | Amit  |
-|       4 | Neha  |
-+---------+-------+
-4 rows in set (0.00 sec)
+
+
 
