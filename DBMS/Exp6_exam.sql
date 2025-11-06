@@ -6,7 +6,6 @@ CREATE TABLE areas (
     area DECIMAL(10,2)
 );
 
-
 DELIMITER $$
 CREATE PROCEDURE populate_areas()
 BEGIN
@@ -60,6 +59,7 @@ CALL populate_areas();
 
 
 SELECT * FROM areas ORDER BY radius;
+
 
 
 
