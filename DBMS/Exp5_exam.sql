@@ -8,7 +8,6 @@ CREATE TABLE Borrower (
     Status CHAR(1)   -- I = Issued, R = Returned
 );
 
-
 CREATE TABLE Fine (
     Roll_no INT,
     Date DATE,
@@ -89,3 +88,4 @@ Select * From Borrower;
 
 
 Select * From Fine;
+
