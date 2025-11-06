@@ -1,5 +1,6 @@
 use ZipcodeDB;
 
+
 db.zipcode.insertMany([
   { _id: "10280", city: "NEW YORK", state: "NY", pop: 5574 },
   { _id: "10282", city: "NEW YORK", state: "NY", pop: 12000 },
@@ -71,3 +72,4 @@ db.zipcode.find(
 
 // Show all the indexes created on the zipcode collection.
 db.zipcode.getIndexes();
+
